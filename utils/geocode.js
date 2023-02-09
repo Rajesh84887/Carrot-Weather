@@ -2,6 +2,8 @@ const request = require('request')
 const geocode = (address,callback)=>{
     const url = 'http://api.positionstack.com/v1/forward?access_key=d79e223fa043ca33c23cd2687f08f194&query='+encodeURIComponent(address)
     request({url: url,json: true},(error,response)=>{
+    //request({url, json: true }, (error, {body}) => {  -->Object Destructuring
+    //body=response.body
         if(error){
             callback('Unable to connect to weather service',null)
         }

@@ -27,21 +27,22 @@ const forecast = require('./utils/forecast.js')
 //         console.log(response.body.data[0].latitude)
 //         console.log(response.body.data[0].longitude)
 //     }
-    
+
 // })
 const address = process.argv[2]
-if(!address){
+if (!address) {
     console.log('Please provide valid address')
-}else{
-    geocode(address,(error,data)=>{
-        if(error){
+} else {
+    geocode(address, (error,{latitude,longitude,location}={}) => { 
+        //={} is default parameter because we pass null which might give error
+        if (error) {
             return console.log(error)
         }
-        forecast(data.latitude,data.longitude,(error,forecastData)=>{
-            if(error){
+        forecast(latitude,longitude, (error, forecastData) => {
+            if (error) {
                 return console.log(error)
             }
-            console.log(data.location)
+            console.log(location)
             console.log(forecastData)
         })
     })
